@@ -6,7 +6,7 @@ public class CalcDemo extends JFrame {
     private  JButton [] btnNumbers ;
     private  JButton btnDot ;
     private  JButton btnEqual ;
-    private  JButton btnPercent ;
+    private  JButton btnPN ;
     private  JButton btnClear ;
     private  JButton btnClearAll ;
     private  JButton btnBackSpace ;
@@ -37,23 +37,37 @@ public class CalcDemo extends JFrame {
         JPanel panelNourth = new JPanel(new GridLayout(1,4 ,3,3));
         panelNourth.setPreferredSize(new Dimension(350,60));
 
-        btnPercent = new JButton("%");
-        btnPercent.setFont(new Font("Tahoma" , Font.BOLD , 24));
-        btnPercent.setBorder(BorderFactory.createRaisedBevelBorder());
-        btnPercent.setBackground(new Color(230,230,230));
-        panelNourth.add(btnPercent);
+        btnPN = new JButton("+/-");
+        btnPN.setFont(new Font("Tahoma" , Font.BOLD , 24));
+        btnPN.setBorder(BorderFactory.createRaisedBevelBorder());
+        btnPN.setBackground(new Color(230,230,230));
+        panelNourth.add(btnPN);
 
-        btnClear = new JButton("C");
+        btnPN.addActionListener(e->{
+            double d = Double.parseDouble(tf.getText());
+            d =-d;
+            tf.setText(d +"");
+
+        });
+
+        btnClear = new JButton("CE");
         btnClear.setFont(new Font("Tahoma" , Font.BOLD , 24));
         btnClear.setBorder(BorderFactory.createRaisedBevelBorder());
         btnClear.setBackground(new Color(230,230,230));
         panelNourth.add(btnClear);
+        btnClear.addActionListener(e-> tf.setText("0"));
 
-        btnClearAll = new JButton("CE");
+        btnClearAll = new JButton("C");
         btnClearAll.setFont(new Font("Tahoma" , Font.BOLD , 24));
         btnClearAll.setBorder(BorderFactory.createRaisedBevelBorder());
         btnClearAll.setBackground(new Color(230,230,230));
         panelNourth.add(btnClearAll);
+        btnClearAll.addActionListener(e-> {
+            tf.setText("0");
+            firstNumber=0;
+            selectedOperation=null;
+            hasOperation =false;
+        });
 
 
         btnBackSpace = new JButton("<-");
@@ -94,23 +108,38 @@ public class CalcDemo extends JFrame {
         btnDot.setBackground(new Color(230,230,230));
         panelC.add(btnDot);
 
+        btnDot.addActionListener(e->{
+           if ( tf.getText().indexOf(".") == -1 ){
+               tf.setText(tf.getText()+ ".");
+           }
+
+//            if (!tf.getText().contains(".")){
+//                tf.setText(tf.getText()+ ".");
+//            }
+
+        });
+
+
         btnEqual = new JButton("=");
         btnEqual.addActionListener(e->{
             double secoundNumber = Double.parseDouble( tf.getText());
-            switch (selectedOperation){
-                case  "+":
-                    tf.setText((firstNumber + secoundNumber) +"");
-                    break;
-                case  "-":
-                    tf.setText((firstNumber - secoundNumber) +"");
-                    break;
-                case  "*":
-                    tf.setText((firstNumber * secoundNumber) +"");
-                    break;
-                case  "/":
-                    tf.setText((firstNumber / secoundNumber) +"");
-                    break;
+            if (selectedOperation != null){
+                switch (selectedOperation){
+                    case  "+":
+                        tf.setText((firstNumber + secoundNumber) +"");
+                        break;
+                    case  "-":
+                        tf.setText((firstNumber - secoundNumber) +"");
+                        break;
+                    case  "*":
+                        tf.setText((firstNumber * secoundNumber) +"");
+                        break;
+                    case  "/":
+                        tf.setText((firstNumber / secoundNumber) +"");
+                        break;
+                }
             }
+
         });
         btnEqual.setFont(new Font("Tahoma" , Font.BOLD , 24));
         btnEqual.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -135,7 +164,39 @@ public class CalcDemo extends JFrame {
             btnOperation [i].setBackground(new Color(230,230,230));
             panelE.add(btnOperation [i]);
 
-
+//            JPanel panelS = new JPanel(new GridLayout(1,4,3,3));
+//            panelS.setPreferredSize(new Dimension(350,40));
+//            panelS.setBackground(Color.cyan);
+//            panelCenter.add(panelS ,BorderLayout.SOUTH);
+//            JPanel panelS2 = new JPanel(new GridLayout(1,4,3,3));
+//            panelS2.setPreferredSize(new Dimension(350,40));
+//            panelS2.setBackground(Color.RED);
+//            this.getContentPane().add(panelS2 ,BorderLayout.SOUTH);
+//
+//
+//
+//            JPanel panelW = new JPanel(new GridLayout(4,1,3,3));
+//            panelW.setPreferredSize(new Dimension(40,300));
+//            panelW.setBackground(Color.BLUE);
+//            panelCenter.add(panelW ,BorderLayout.WEST);
+//
+//            JPanel panelW2 = new JPanel(new GridLayout(4,1,3,3));
+//            panelW2.setPreferredSize(new Dimension(40,300));
+//            panelW2.setBackground(Color.BLACK);
+//            this.getContentPane().add(panelW2 ,BorderLayout.WEST);
+//
+//            JPanel panelE2 = new JPanel(new GridLayout(4,1,3,3));
+//            panelE2.setPreferredSize(new Dimension(80,300));
+//            panelE2.setBackground(Color.BLACK);
+//            this.getContentPane().add(panelE2 ,BorderLayout.EAST);
+//
+//            JButton bs = new JButton("11");
+//            panelE2.add(bs);
+//
+//            JButton bs2 = new JButton("12");
+//            panelE2.add(bs2);
+//
+//            panelS2.add(bs);
         }
     }
 
