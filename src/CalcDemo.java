@@ -1,5 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
+import java.net.URL;
 
 public class CalcDemo extends JFrame {
     private  JTextField tf ;
@@ -17,6 +18,17 @@ public class CalcDemo extends JFrame {
 
     public CalcDemo(){
         setTitle("Calculator");
+        try {
+            URL url = new URL("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTrs5Gp_zQMOv7p90bCDIZ5wUpZ8-lGRZtJhA&usqp=CAU");
+            ImageIcon icCalc = new ImageIcon(url);
+            this.setIconImage(icCalc.getImage());
+
+        }catch (Exception exp){
+            System.out.println(exp.getMessage());
+        }
+        ImageIcon ic = new ImageIcon("C:\\Users\\dode3\\IdeaProjects\\ui\\src\\calculator.png");
+        ImageIcon icGirl = new ImageIcon("C:\\Users\\dode3\\IdeaProjects\\ui\\src\\woman.png");
+
         setBounds(400,15,350,400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -38,6 +50,7 @@ public class CalcDemo extends JFrame {
         panelNourth.setPreferredSize(new Dimension(350,60));
 
         btnPN = new JButton("+/-");
+//        btnPN.setIcon(icGirl);
         btnPN.setFont(new Font("Tahoma" , Font.BOLD , 24));
         btnPN.setBorder(BorderFactory.createRaisedBevelBorder());
         btnPN.setBackground(new Color(230,230,230));
@@ -51,6 +64,7 @@ public class CalcDemo extends JFrame {
         });
 
         btnClear = new JButton("CE");
+//        btnClear.setIcon(icGirl);
         btnClear.setFont(new Font("Tahoma" , Font.BOLD , 24));
         btnClear.setBorder(BorderFactory.createRaisedBevelBorder());
         btnClear.setBackground(new Color(230,230,230));
