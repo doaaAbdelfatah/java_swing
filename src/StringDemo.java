@@ -28,6 +28,19 @@ public class StringDemo {
             System.out.println(e.name);
         }
 
+        System.out.println("------------------");
+
+        String names [] ={"ahmed" , "sara" ,"dina" ,"mohamed" , "Morad"};
+
+        for (int i = 0; i < names.length; i++) {
+            System.out.println(names[i]);
+        }
+
+        System.out.println("**************");
+        for (String s : names){
+            System.out.println(s);
+        }
+
 
 
     }
