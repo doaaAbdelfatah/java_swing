@@ -1,14 +1,14 @@
 import javax.swing.*;
 import java.awt.*;
 
-public class ContactFrame extends JFrame {
+public class ContactFrame2 extends JFrame {
 
-    public ContactFrame(){
+    public ContactFrame2(){
         setTitle("Contacts");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         ImageIcon icon = new ImageIcon("C:\\Users\\dode3\\IdeaProjects\\ui\\src\\contact-book.png");
         setIconImage(icon.getImage());
-        setBounds(400,150,500,400);
+        setBounds(400,150,500,500);
 
         JPanel panelCenter = new JPanel(null);
         this.getContentPane().add(panelCenter);
@@ -54,23 +54,22 @@ public class ContactFrame extends JFrame {
         labelLanguages.setBounds(20,170,130,30);
         panelCenter.add(labelLanguages);
 
-        JCheckBox checkBoxEn = new JCheckBox("English");checkBoxEn.setFont(font);
-        JCheckBox checkBoxGr = new JCheckBox("German");checkBoxGr.setFont(font);
-        JCheckBox checkBoxAr = new JCheckBox("Arabic");checkBoxAr.setFont(font);
-        checkBoxAr.setSelected(true);
-        checkBoxEn.setBounds(150,170,150,30);
-        checkBoxGr.setBounds(150,200,150,30);
-        checkBoxAr.setBounds(150,230,150,30);
-
-        panelCenter.add(checkBoxEn);
-        panelCenter.add(checkBoxGr);
-        panelCenter.add(checkBoxAr);
+        String langs [] = {"English" , "German" , "Arabic" , "French" , "Chinese" , "Italy" , "Japanes"};
+        JCheckBox [] checkBoxLangs = new JCheckBox[langs.length];
+        int y =0;
+        for (int i = 0; i <checkBoxLangs.length ; i++) {
+            checkBoxLangs[i] = new JCheckBox(langs[i]);
+            checkBoxLangs[i].setFont(font);
+            checkBoxLangs[i].setBounds(150 ,170 +y ,150,30);
+            y +=30;
+            panelCenter.add(checkBoxLangs[i]);
+        }
 
         ImageIcon icSave =new ImageIcon("C:\\Users\\dode3\\IdeaProjects\\ui\\src\\diskette.png");
         JButton buttonSave = new JButton("Save" ,icSave);buttonSave.setFont(font);
         JButton buttonClear = new JButton("Clear");buttonClear.setFont(font);
-        buttonSave.setBounds(150,290,150,50);
-        buttonClear.setBounds(310,290,150,50);
+        buttonSave.setBounds(150,400,150,50);
+        buttonClear.setBounds(310,400,150,50);
 
         buttonSave.setBorder(BorderFactory.createRaisedBevelBorder());
         buttonClear.setBorder(BorderFactory.createRaisedBevelBorder());
@@ -85,9 +84,10 @@ public class ContactFrame extends JFrame {
                 data += "\nGender : " + radioButtonFemale.getText();
             }
             data += "\nLanguages : " ;
-            if (checkBoxEn.isSelected())  data+= checkBoxEn.getText() + " ";
-            if (checkBoxGr.isSelected())  data+= checkBoxGr.getText() + " ";
-            if (checkBoxAr.isSelected())  data+= checkBoxAr.getText() + " ";
+
+            for (JCheckBox ck : checkBoxLangs)
+                if (ck.isSelected())  data += ck.getText() + " ";
+
 
             JOptionPane.showMessageDialog(null , data);
         });
@@ -95,7 +95,7 @@ public class ContactFrame extends JFrame {
 
 
     public static void main(String[] args) {
-        ContactFrame f = new ContactFrame();
+        ContactFrame2 f = new ContactFrame2();
         f.setVisible(true);
     }
 }
