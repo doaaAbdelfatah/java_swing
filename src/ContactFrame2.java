@@ -88,10 +88,6 @@ public class ContactFrame2 extends JFrame {
             for (JCheckBox ck : checkBoxLangs)
                 if (ck.isSelected())  data += ck.getText() + " ";
 
-//            for (int i = 0; i < checkBoxLangs.length; i++) {
-//                if (checkBoxLangs[i].isSelected())  data += checkBoxLangs[i].getText() + " ";
-//
-//            }
 
             JOptionPane.showMessageDialog(null , data);
         });

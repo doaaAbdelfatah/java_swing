@@ -37,6 +37,7 @@ public class StringDemo {
         }
 
         System.out.println("**************");
+
         for (String s : names){
             System.out.println(s);
         }
