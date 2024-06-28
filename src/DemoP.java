@@ -117,6 +117,7 @@ public class DemoP  extends JPanel implements MouseListener  {
         toolBar.add(tf);
         frame.setVisible(true);
     }
+
     @Override
     public void mouseClicked(MouseEvent e) {
 
@@ -139,6 +140,7 @@ public class DemoP  extends JPanel implements MouseListener  {
     public void mouseEntered(MouseEvent e) {
 
     }
+
 
     @Override
     public void mouseExited(MouseEvent e) {
