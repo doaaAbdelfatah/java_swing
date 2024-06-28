@@ -17,7 +17,6 @@ public class DemoP  extends JPanel implements MouseListener  {
     public DemoP(){
         color = Color.RED;
         this.addMouseListener(this);
-
     }
     @Override
     protected void paintComponent(Graphics g) {
@@ -46,8 +45,10 @@ public class DemoP  extends JPanel implements MouseListener  {
         frame.getContentPane().add(new DemoP());
         frame.setBounds(400,150,700,600);
 
-        JPanel pN = new JPanel();
-        frame.getContentPane().add(pN, BorderLayout.NORTH);
+//        JPanel pN = new JPanel();
+        JToolBar toolBar = new JToolBar();
+
+        frame.getContentPane().add(toolBar, BorderLayout.NORTH);
 
         JToggleButton bLine = new JToggleButton("Line");
         JToggleButton bRect = new JToggleButton("Rect");
@@ -67,15 +68,17 @@ public class DemoP  extends JPanel implements MouseListener  {
         bg.add(bRect);
         bg.add(bOval);
 
-        pN.add(bLine);pN.add(bRect);pN.add(bOval);
-
+        toolBar.add(bLine);toolBar.add(bRect);toolBar.add(bOval);
+        toolBar.addSeparator();
         JToggleButton bR = new JToggleButton();
         bR.setBackground(Color.RED);
         bR.setPreferredSize(new Dimension(30,30));
         JToggleButton bG = new JToggleButton();
         bG.setBackground(Color.GREEN);bG.setPreferredSize(new Dimension(30,30));
-        JToggleButton bB = new JToggleButton("Blue");
-        JToggleButton bP = new JToggleButton("Pink");
+        JToggleButton bB = new JToggleButton();
+        bB.setBackground(Color.BLUE);bB.setPreferredSize(new Dimension(30,30));
+        JToggleButton bP = new JToggleButton();
+        bP.setBackground(Color.PINK);bP.setPreferredSize(new Dimension(30,30));
         ButtonGroup bgC = new ButtonGroup();
         bgC.add(bR);
         bgC.add(bG);
@@ -87,10 +90,10 @@ public class DemoP  extends JPanel implements MouseListener  {
         bB.addActionListener(e->color = Color.BLUE);
         bP.addActionListener(e->color = Color.PINK);
 
-        pN.add(bR);
-        pN.add(bG);
-        pN.add(bB);
-        pN.add(bP);
+        toolBar.add(bR);
+        toolBar.add(bG);
+        toolBar.add(bB);
+        toolBar.add(bP);
 
         frame.setVisible(true);
     }
