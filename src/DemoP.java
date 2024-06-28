@@ -2,29 +2,96 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
+import java.awt.geom.Rectangle2D;
 
-public class DemoP  extends JPanel implements MouseListener {
+public class DemoP  extends JPanel implements MouseListener  {
 
     private  int x1 ,x2 , y1 ,y2;
 
+    private static String shape ="line";
+    private static Color  color;
+
     public DemoP(){
+        color = Color.RED;
         this.addMouseListener(this);
+
     }
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
         g2d.setStroke(new BasicStroke(5));
-        g2d.setColor(Color.RED);
+        g2d.setColor(color);
 
-        Line2D l = new Line2D.Float(x1,y1 ,x2,y2);
-        g2d.draw(l);
+        if (shape.equals("line")){
+            Line2D l = new Line2D.Float(x1,y1 ,x2,y2);
+            g2d.draw(l);
+        }else if(shape.equals("rect")){
+            int w = x2 -x1;
+            int h =y2 -y1;
+            Rectangle2D r = new Rectangle2D.Float(x1,y1,w,h );
+            g2d.fill(r);
+        }else if(shape.equals("oval")){
+            int w = x2 -x1;
+            int h =y2 -y1;
+            Ellipse2D r = new Ellipse2D.Float(x1,y1,w,h );
+            g2d.fill(r);
+        }
     }
 
     public static void main(String[] args) {
         JFrame frame= new JFrame();
         frame.getContentPane().add(new DemoP());
         frame.setBounds(400,150,700,600);
+
+        JPanel pN = new JPanel();
+        frame.getContentPane().add(pN, BorderLayout.NORTH);
+
+        JToggleButton bLine = new JToggleButton("Line");
+        JToggleButton bRect = new JToggleButton("Rect");
+        JToggleButton bOval = new JToggleButton("Oval");
+
+        bLine.addActionListener(e->{
+            shape = "line";
+        });
+        bRect.addActionListener(e->{
+            shape = "rect";
+        });
+        bOval.addActionListener(e->{
+            shape = "oval";
+        });
+        ButtonGroup bg = new ButtonGroup();
+        bg.add(bLine);
+        bg.add(bRect);
+        bg.add(bOval);
+
+        pN.add(bLine);pN.add(bRect);pN.add(bOval);
+
+        JToggleButton bR = new JToggleButton();
+        bR.setBackground(Color.RED);
+        bR.setPreferredSize(new Dimension(30,30));
+        JToggleButton bG = new JToggleButton();
+        bG.setBackground(Color.GREEN);bG.setPreferredSize(new Dimension(30,30));
+        JToggleButton bB = new JToggleButton("Blue");
+        JToggleButton bP = new JToggleButton("Pink");
+        ButtonGroup bgC = new ButtonGroup();
+        bgC.add(bR);
+        bgC.add(bG);
+        bgC.add(bB);
+        bgC.add(bP);
+
+        bR.addActionListener(e->color = Color.RED);
+        bG.addActionListener(e->color = Color.GREEN);
+        bB.addActionListener(e->color = Color.BLUE);
+        bP.addActionListener(e->color = Color.PINK);
+
+        pN.add(bR);
+        pN.add(bG);
+        pN.add(bB);
+        pN.add(bP);
+
         frame.setVisible(true);
     }
     @Override
@@ -54,4 +121,5 @@ public class DemoP  extends JPanel implements MouseListener {
     public void mouseExited(MouseEvent e) {
 
     }
+
 }
