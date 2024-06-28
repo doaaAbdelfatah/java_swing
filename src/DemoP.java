@@ -1,8 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.event.MouseMotionListener;
+import java.awt.event.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Line2D;
 import java.awt.geom.Rectangle2D;
@@ -13,15 +11,17 @@ public class DemoP  extends JPanel implements MouseListener  {
 
     private static String shape ="line";
     private static Color  color;
+    private static int  strokWidth;
 
     public DemoP(){
         color = Color.RED;
+        strokWidth= 5;
         this.addMouseListener(this);
     }
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2d = (Graphics2D) g;
-        g2d.setStroke(new BasicStroke(5));
+        g2d.setStroke(new BasicStroke(strokWidth));
         g2d.setColor(color);
 
         if (shape.equals("line")){
@@ -95,6 +95,26 @@ public class DemoP  extends JPanel implements MouseListener  {
         toolBar.add(bB);
         toolBar.add(bP);
 
+        toolBar.addSeparator();
+
+        JTextField tf = new JTextField(strokWidth+"");
+        tf.addKeyListener(new KeyListener() {
+            @Override
+            public void keyTyped(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyPressed(KeyEvent e) {
+
+            }
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                strokWidth = Integer.parseInt(tf.getText() );
+            }
+        });
+        toolBar.add(tf);
         frame.setVisible(true);
     }
     @Override
